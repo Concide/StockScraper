@@ -1,8 +1,8 @@
 const request = require("request")
 
-const finviz = require("./finviz")
-const guruFocus = require("./guruFocus")
-const iextrading = require("./iextrading")
+const finviz = require("./src/finviz")
+const guruFocus = require("./src/guruFocus")
+const iextrading = require("./src/iextrading")
 
 const getData = async ticker => {
   try {
