@@ -10,7 +10,7 @@ Stock Scraper is a little script, that fetches and parses data about stock from 
 
 ```javascript
 //* import scraper from "./StockScraper" */
-const stockScraper = require("./StockScraper")
+const scraper = require("./StockScraper")
 
 scraper("aapl").then(data => {
   /* do something with data */
