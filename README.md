@@ -105,7 +105,7 @@ Scraper returns an object with following structure:
      chart2y: [ {} ], /* Array of objects for every trading day for last 2 years */
      chart5y: [ {} ]  /* Array of objects for every trading day for last 5 years */
   }
-     }
+}
 ```
 If ticker not found returns an following object:
 ```javascript 
