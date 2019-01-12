@@ -10,7 +10,7 @@ const getData = async ticker => {
 
     let guruFocusData
 
-    if (finvizData["Dividend"]) {
+    if (finvizData.dividend) {
       guruFocusData = await guruFocus(ticker)
     }
 
