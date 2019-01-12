@@ -107,3 +107,10 @@ Scraper returns an object with following structure:
   }
      }
 ```
+If ticker not found returns an following object:
+```javascript 
+{
+   statusCode,
+   message: 'Ticker not found'
+}
+```
