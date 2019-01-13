@@ -20,7 +20,10 @@ const getData = async ticker => {
       ticker: ticker.toUpperCase(),
       ...finvizData,
       ...guruFocusData,
-      ...iextradingData
+      ...iextradingData,
+      fairPricePercent: Number(
+        (finvizData.targetPrice / iextradingData.price - 1).toFixed(3)
+      )
     }
 
     if (data.statusCode) {
