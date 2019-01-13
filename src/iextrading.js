@@ -20,12 +20,6 @@ const getData = async ticker => {
         `https://api.iextrading.com/1.0/stock/${ticker}/financials?period=annual`
       ],
       ["chart1d", `https://api.iextrading.com/1.0/stock/${ticker}/chart/1d`],
-      ["chart5d", `https://api.iextrading.com/1.0/stock/${ticker}/chart/5d`],
-      ["chart1m", `https://api.iextrading.com/1.0/stock/${ticker}/chart/1m`],
-      ["chart3m", `https://api.iextrading.com/1.0/stock/${ticker}/chart/3m`],
-      ["chart6m", `https://api.iextrading.com/1.0/stock/${ticker}/chart/6m`],
-      ["chart1y", `https://api.iextrading.com/1.0/stock/${ticker}/chart/1y`],
-      ["chart2y", `https://api.iextrading.com/1.0/stock/${ticker}/chart/2y`],
       ["chart5y", `https://api.iextrading.com/1.0/stock/${ticker}/chart/5y`]
     ]
 
@@ -75,14 +69,8 @@ const getData = async ticker => {
       financialsQuarter: data.financialsQuarter.financials,
       financialsYear: data.financialsYear.financials,
       charts: {
-        chart1d: data.chart1d,
-        chart5d: data.chart5d,
-        chart1m: data.chart1m,
-        chart3m: data.chart3m,
-        chart6m: data.chart6m,
-        chart1y: data.chart1y,
-        chart2y: data.chart2y,
-        chart5y: data.chart5y
+        chartMinuteLastDay: data.chart1d,
+        chartDailyLast5Years: data.chart5y
       }
     }
   } catch (err) {

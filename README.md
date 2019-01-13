@@ -96,19 +96,15 @@ Scraper returns an object with following structure:
   financialsQuarter: [ {} ], /* Array of objects with financial data for 4 last quarters */
   financialsYear: [ {} ], /* Array of objects with financial data for 4 last years annually */
   charts:
-   { chart1d: [ {} ], /* Array of objects for every minute for last trading day */
-     chart5d: [ {} ], /* Array of objects for every trading day for last 5 days */
-     chart1m: [ {} ], /* Array of objects for every trading day for last month */
-     chart3m: [ {} ], /* Array of objects for every trading day for last 3 months */
-     chart6m: [ {} ], /* Array of objects for every trading day for last 6 months */
-     chart1y: [ {} ], /* Array of objects for every trading day for last year */
-     chart2y: [ {} ], /* Array of objects for every trading day for last 2 years */
-     chart5y: [ {} ]  /* Array of objects for every trading day for last 5 years */
+   { chartMinuteLastDay: [ {} ], /* Array of objects for every minute for last trading day */
+     chartDailyLast5Years: [ {} ]  /* Array of objects for every trading day for last 5 years */
   }
 }
 ```
+
 If ticker not found returns an following object:
-```javascript 
+
+```javascript
 {
    statusCode,
    message: 'Ticker not found'
