@@ -3,6 +3,7 @@ const fetch = require("node-fetch")
 const getData = async ticker => {
   try {
     const api = [
+      ["dividendsHistory",`https://api.iextrading.com/1.0/stock/${ticker}/dividends/5y`],
       ["logo", `https://api.iextrading.com/1.0/stock/${ticker}/logo`],
       ["company", `https://api.iextrading.com/1.0/stock/${ticker}/company`],
       ["stock", `https://api.iextrading.com/1.0/stock/${ticker}/stats`],
@@ -10,6 +11,7 @@ const getData = async ticker => {
       ["price", `https://api.iextrading.com/1.0/stock/${ticker}/price`],
       ["news", `https://api.iextrading.com/1.0/stock/${ticker}/news`],
       ["peers", `https://api.iextrading.com/1.0/stock/${ticker}/peers`],
+      ["splits",`https://api.iextrading.com/1.0/stock/${ticker}/splits/5y`],
       ["earnings", `https://api.iextrading.com/1.0/stock/${ticker}/earnings`],
       [
         "financialsQuarter",
@@ -40,6 +42,8 @@ const getData = async ticker => {
       }, {})
 
     return {
+      dividendsHistory: data.dividendsHistory,
+      splits: data.splits,
       logo: data.logo.url,
       company: data.company.companyName,
       marketCap: data.quote.marketCap,
