@@ -67,6 +67,8 @@ Scraper returns an object with following structure:
   yoc3YPercent: 0.0254,
   yoc5YPercent: 0.0305,
   yoc10YPercent: 0.018500000000000003,
+  dividendsHistory: [{}], /* Array of dividend payments over last 5 years  */
+  splits: [{}], /* Array of stock splits over last 5 years */
   logo: 'https://storage.googleapis.com/iex/api/logos/AAPL.png',
   company: 'Apple Inc.',
   marketCap: 720301698870,
