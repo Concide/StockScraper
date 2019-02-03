@@ -9,7 +9,7 @@ Stock Scraper is a little script, that fetches and parses data about stock from 
 ## Example
 
 ```javascript
-const scraper = require("./StockScraper")
+const scraper = require("@concide/stock-scraper")
 
 scraper("aapl").then(data => {
   /* do something with data */
