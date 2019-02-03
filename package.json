@@ -1,7 +1,7 @@
 {
-  "name": "stock-scraper",
+  "name": "@concide/stock-scraper",
   "version": "1.0.0",
-  "description": "",
+  "description": "Stock Scraper is a little script, that fetches and parses data about stock from :",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -17,5 +17,19 @@
   },
   "devDependencies": {
     "nodemon": "^1.18.9"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Concide/StockScraper.git"
+  },
+  "keywords": [
+    "scraper",
+    "ticker",
+    "stock",
+    "financial"
+  ],
+  "bugs": {
+    "url": "https://github.com/Concide/StockScraper/issues"
+  },
+  "homepage": "https://github.com/Concide/StockScraper#readme"
 }

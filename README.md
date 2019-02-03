@@ -101,6 +101,7 @@ Scraper returns an object with following structure:
    { chartMinuteLastDay: [ {} ], /* Array of objects for every minute for last trading day */
      chartDailyLast5Years: [ {} ]  /* Array of objects for every trading day for last 5 years */
   },
+  pegDivAdjusted: 0.978,
   fairPricePercent: 0.173
 }
 ```

@@ -16,14 +16,48 @@ const getData = async ticker => {
 
     const iextradingData = await iextrading(ticker)
 
+    let pegAdjusted
+
+    if (
+      finvizData.pe &&
+      finvizData.epsThisYearGrowthPercent &&
+      finvizData.dividendPercent &&
+      finvizData.dividendPercent < 0.04 &&
+      finvizData.epsThisYearGrowthPercent > 0
+    ) {
+      const { dividendPercent, epsThisYearGrowthPercent, pe } = finvizData
+
+      pegAdjusted = Number(
+        (pe / ((dividendPercent + epsThisYearGrowthPercent) * 100)).toFixed(3)
+      )
+
+      if (guruFocusData && guruFocusData.cagr5YPercent) {
+        pegAdjusted = Number(
+          (
+            pe /
+            ((dividendPercent * (1 + guruFocusData.cagr5YPercent) +
+              epsThisYearGrowthPercent) *
+              100)
+          ).toFixed(3)
+        )
+      }
+    }
+
     const data = {
       ticker: ticker.toUpperCase(),
-      ...finvizData,
-      ...guruFocusData,
-      ...iextradingData,
-      fairPricePercent: Number(
-        (finvizData.targetPrice / iextradingData.price - 1).toFixed(3)
-      )
+      data: {
+        ticker: ticker.toUpperCase(),
+        ...finvizData,
+        ...guruFocusData,
+        ...iextradingData.data,
+        pegDivAdjusted: pegAdjusted ? pegAdjusted : finvizData.peg,
+        fairPricePercent: Number(
+          (finvizData.targetPrice / iextradingData.data.price - 1).toFixed(3)
+        )
+      },
+      charts: {
+        ...iextradingData.charts
+      }
     }
 
     if (data.statusCode) {
