@@ -22,7 +22,7 @@ RecommendationTrends - 1k messages
 ## Example
 
 ```javascript
-const scraper = require("stock-scraper")
+const scraper = require("@concide/stock-scraper")
 
 scraper({ ticker: "aapl", token: "123" }).then(data => {
   /* do something with data */
@@ -32,7 +32,7 @@ scraper({ ticker: "aapl", token: "123" }).then(data => {
 Optionally, you can set settings for requesting data. By default all settings set to true.
 
 ```javascript
-const scraper = require("stock-scraper")
+const scraper = require("@concide/stock-scraper")
 
 scraper({
   ticker: "aapl",
