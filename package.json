@@ -1,18 +1,18 @@
 {
-  "name": "@concide/stock-scraper",
-  "version": "1.0.0",
-  "description": "Stock Scraper is a little script, that fetches and parses data about stock from :",
+  "name": "stock-scraper",
+  "version": "2.0.0",
+  "description": "Stock Scraper is a script, that fetches and parses data about stock from :",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start-dev": "nodemon index.js"
+    "start": "nodemon index.js"
   },
   "author": "German Sigutov",
   "license": "ISC",
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",
     "node-fetch": "^2.3.0",
-    "request": "^2.88.0",
+    "puppeteer": "^1.14.0",
     "request-promise": "^4.2.2"
   },
   "devDependencies": {

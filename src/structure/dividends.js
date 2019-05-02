@@ -1,0 +1,21 @@
+const { checkValue } = require("../utils")
+
+module.exports = ({ finviz, gurufocus, iextrading }) => {
+  if (!gurufocus) return null
+  return {
+    buybackPercent: checkValue(gurufocus.buybackRatio),
+    dividendYieldPercent: checkValue(finviz.dividendPercent["Dividend %"]),
+    dividend: checkValue(finviz.dividend["Dividend"]),
+    exDividendDate: iextrading.stock.exDividendDate,
+    growthRatePercent1y: checkValue(gurufocus["Growth Rate (1-year)"]),
+    growthRatePercent3y: checkValue(gurufocus["Growth Rate (3-year)"]),
+    growthRatePercent5y: checkValue(gurufocus["Growth Rate (5-year)"]),
+    growthRatePercent10y: checkValue(gurufocus["Growth Rate (10-year)"]),
+    history: iextrading.dividendsHistory,
+    payoutRatioPercent: checkValue(gurufocus.payoutRatio),
+    yieldOnCost1yPercent: checkValue(gurufocus["Yield on Cost (1-year)"]),
+    yieldOnCost3yPercent: checkValue(gurufocus["Yield on Cost (3-year)"]),
+    yieldOnCost5yPercent: checkValue(gurufocus["Yield on Cost (5-year)"]),
+    yieldOnCost10yPercent: checkValue(gurufocus["Yield on Cost (10-year)"])
+  }
+}

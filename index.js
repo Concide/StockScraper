@@ -1,74 +1,32 @@
-const request = require("request")
+const finvizAPI = require("./src/api/finviz")
+const guruFocusAPI = require("./src/api/guruFocus")
+const iextradingAPI = require("./src/api/iextrading")
 
-const finviz = require("./src/finviz")
-const guruFocus = require("./src/guruFocus")
-const iextrading = require("./src/iextrading")
+const buildObject = require("./src/utils/buildObject")
+const getSettings = require("./src/utils/getSettings")
 
-const getData = async ticker => {
+const getData = async ({ ticker, token, settings = {} }) => {
   try {
-    const finvizData = await finviz(ticker)
+    if (!token) return undefined
+    const dataSettings = getSettings(settings)
 
-    let guruFocusData
-
-    if (finvizData.dividend) {
-      guruFocusData = await guruFocus(ticker)
+    let data = {
+      gurufocus: null,
+      finviz: await finvizAPI(ticker),
+      iextrading:
+        token &&
+        (await iextradingAPI({ ticker, token, settings: dataSettings }))
     }
 
-    const iextradingData = await iextrading(ticker)
+    if (data.finviz.statusCode || !data.iextrading) return undefined
 
-    let pegAdjusted
-
-    if (
-      finvizData.pe &&
-      finvizData.epsThisYearGrowthPercent &&
-      finvizData.dividendPercent &&
-      finvizData.dividendPercent < 0.04 &&
-      finvizData.epsThisYearGrowthPercent > 0
-    ) {
-      const { dividendPercent, epsThisYearGrowthPercent, pe } = finvizData
-
-      pegAdjusted = Number(
-        (pe / ((dividendPercent + epsThisYearGrowthPercent) * 100)).toFixed(3)
-      )
-
-      if (guruFocusData && guruFocusData.cagr5YPercent) {
-        pegAdjusted = Number(
-          (
-            pe /
-            ((dividendPercent * (1 + guruFocusData.cagr5YPercent) +
-              epsThisYearGrowthPercent) *
-              100)
-          ).toFixed(3)
-        )
-      }
+    if (dataSettings.dividends || dataSettings.ratios) {
+      data = { ...data, gurufocus: await guruFocusAPI(ticker) }
     }
 
-    const data = {
-      ticker: ticker.toUpperCase(),
-      data: {
-        ticker: ticker.toUpperCase(),
-        ...finvizData,
-        ...guruFocusData,
-        ...iextradingData.data,
-        pegDivAdjusted: pegAdjusted ? pegAdjusted : finvizData.peg,
-        fairPricePercent: Number(
-          (finvizData.targetPrice / iextradingData.data.price - 1).toFixed(3)
-        )
-      },
-      charts: {
-        ...iextradingData.charts
-      }
-    }
-
-    if (data.statusCode) {
-      return {
-        statusCode: data.statusCode,
-        message: data.message
-      }
-    }
-    return data
+    return buildObject(ticker, data, dataSettings)
   } catch (err) {
-    return err
+    return undefined
   }
 }
 

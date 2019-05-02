@@ -1,17 +1,55 @@
 # Stock Scraper
 
-Stock Scraper is a little script, that fetches and parses data about stock from :
+Stock Scraper is a script, that fetches and parses data about stock from :
 
 1. FinViz
 2. GuruFocus
 3. iexTrading API
 
+## Requirements
+
+In last update iexTrading API became freemium instead of free. So, you need to register on https://iexcloud.io/ to get token.  
+Free account offers you 500k monthy. All data about stock - ~4.75k messages. You can turn off chart in settings and one request will cost you about 2.5k.
+
+```
+All data - ~4.75k messages
+Chart - ~2.5k messages
+Dividends - ~200 messages
+Peers - 500 messages
+RecommendationTrends - 1k messages
+```
+
 ## Example
 
 ```javascript
-const scraper = require("@concide/stock-scraper")
+const scraper = require("stock-scraper")
 
-scraper("aapl").then(data => {
+scraper({ ticker: "aapl", token: "123" }).then(data => {
+  /* do something with data */
+})
+```
+
+Optionally, you can set settings for requesting data. By default all settings set to true.
+
+```javascript
+const scraper = require("stock-scraper")
+
+scraper({
+  ticker: "aapl",
+  token: "123",
+  settings: {
+    id: false,
+    ticker: true,
+    chart: false,
+    company: false,
+    dividends: true,
+    financials: false,
+    news: false,
+    other: false,
+    peers: false,
+    recommendationTrends: true
+  }
+}).then(data => {
   /* do something with data */
 })
 ```
@@ -19,98 +57,106 @@ scraper("aapl").then(data => {
 Scraper returns an object with following structure:
 
 ```javascript
-{ ticker: 'AAPL',
-  pe: 12.54,
-  peForward: 11.09,
-  epsTTM: 12.15,
-  epsNextQuarter: 4.23,
-  epsThisYearGrowthPercent: 0.326,
-  epsNextYearGrowthPercent: 0.11449999999999999,
-  epsNext5YGrowthPercent: 0.13,
-  epsPast5YGrowthPercent: 0.165,
-  epsQQGrowthPercent: 0.3,
-  salesQQGrowthPercent: 0.196,
-  salesPast5YGrowthPercent: 0.092,
-  income: '61.03B',
-  sales: '265.60B',
-  peg: 0.96,
-  ps: 2.9,
-  pb: 6.83,
-  pc: 11.61,
-  pfcf: 15.27,
-  grossMarginPercent: 0.38299999999999995,
-  operMarginPercent: 0.267,
-  profitMarginPercent: 0.22399999999999998,
-  bookPerShare: 22.31,
-  cashPerShare: 13.12,
-  roa: 0.16,
-  roe: 0.48700000000000004,
-  roi: 0.266,
-  debtToEq: 1.07,
-  ltDebtToEq: 0.87,
-  institOwn: 0.612,
-  yearLow: 0.0725,
-  yearHigh: -0.3477,
-  dividend: 2.92,
-  dividendPercent: 0.0192,
-  beta: 1.21,
-  targetPrice: 218.78,
-  analystRecommendation: 2.2,
-  divSinceYear: 2012,
-  divIncreaseStreak: 7,
-  payoutRatioPercent: 0.23,
-  cagr1YPercent: 0.133,
-  cagr3YPercent: 0.11199999999999999,
-  cagr5YPercent: 0.105,
-  cagr10YPercent: 0,
-  yoc1YPercent: 0.021,
-  yoc3YPercent: 0.0254,
-  yoc5YPercent: 0.0305,
-  yoc10YPercent: 0.018500000000000003,
-  dividendsHistory: [{}], /* Array of dividend payments over last 5 years  */
-  splits: [{}], /* Array of stock splits over last 5 years */
-  logo: 'https://storage.googleapis.com/iex/api/logos/AAPL.png',
-  company: 'Apple Inc.',
-  marketCap: 720301698870,
-  sector: 'Technology',
-  industry: 'Computer Hardware',
-  tags: [ 'Technology', 'Consumer Electronics', 'Computer Hardware' ],
-  website: 'http://www.apple.com',
-  description: 'Apple Inc is designs, manufactures and markets mobile communication and media devices and personal computers, and sells a variety of related software, services, accessories, networking solutions and third-party digital content and applications.',
-  CEO: 'Timothy D. Cook',
-  week52low: 142,
-  week52high: 233.47,
-  y5changePercent: 1.168143986742559,
-  y2changePercent: 0.31863203074874297,
-  y1changePercent: -0.11310799478196049,
-  ytdchangePercent: -0.03565096251266461,
-  m6changePercent: -0.1943402255360662,
-  m3changePercent: -0.29367086611470744,
-  m1changePercent: -0.10206367924528303,
-  d30changePercent: -0.15833978114292033,
-  d5changePercent: 0.02947339958088275,
-  todayChangePercent: -0.00982,
-  exDividendDate: '2018-11-08 00:00:00.0',
-  price: 152.29,
-  news: [ {} ], /* Array of objects with last news with company mentioning */
-  peers: [ 'XLK' ], /* Array of strings with tickers of peer companies */
-  earnings: [ {} ], /* Array of objects with earnings data for 4 last quarters */
-  financialsQuarter: [ {} ], /* Array of objects with financial data for 4 last quarters */
-  financialsYear: [ {} ], /* Array of objects with financial data for 4 last years annually */
-  charts:
-   { chartMinuteLastDay: [ {} ], /* Array of objects for every minute for last trading day */
-     chartDailyLast5Years: [ {} ]  /* Array of objects for every trading day for last 5 years */
+{ id: 'aapl',
+  ticker: 'AAPL',
+  chart: [ {} ],  /* Array of objects for every trading day for last 5 years */
+  company: {
+    symbol: 'AAPL',
+    companyName: 'Apple, Inc.',
+    exchange: 'NASDAQ',
+    industry: 'Telecommunications Equipment',
+    website: 'http://www.apple.com',
+    description: 'Designs, manufactures, and markets mobile communication, mediadevices, personal computers, and portable digital music players',
+    CEO: 'Timothy Donald Cook',
+    securityName: 'Apple Inc.',
+    issueType: 'cs',
+    sector: 'Electronic Technology',
+    employees: 132000,
+    tags: [ 'Electronic Technology', 'Telecommunications Equipment' ]
   },
-  pegDivAdjusted: 0.978,
-  fairPricePercent: 0.173
+  dividends: {
+    buybackPercent: 0.052,
+    dividendYieldPercent: 0.014,
+    dividend: 2.92,
+    exDividendDate: '2019-02-08',
+    growthRatePercent1y: 0.146,
+    growthRatePercent3y: 0.112,
+    growthRatePercent5y: 0.105,
+    growthRatePercent10y: 0,
+    history: [ {} ], /* Array of objects about dividend payments for last 5 years */
+    payoutRatioPercent: 0.23,
+    yieldOnCost1yPercent: 0.016,
+    yieldOnCost3yPercent: 0.02,
+    yieldOnCost5yPercent: 0.024,
+    yieldOnCost10yPercent: 0.014
+  },
+  financials: {
+    bookPerShare: 24.89,
+    cashPerShare: 18.45,
+    earningsNextDate: '2019-05-01',
+    epsTTM: 11.94,
+    epsNextQuarter: 2.36,
+    epsGrowthThisYearPercent: 0.326,
+    epsGrowthNextYearPercent: 0.126,
+    epsGrowthNext5YPercent: 0.13,
+    epsGrowthPast5YPercent: 0.165,
+    epsGrowthQQPercent: -0.048,
+    income: '58.33B',
+    marginGrossPercent: 0.382,
+    marginOperPercent: 0.26,
+    marginProfitPercent: 0.227,
+    sales: '261.61B',
+    salesGrowthQQPercent: -0.045,
+    salesGrowthPast5YPercent: 0.092
+  },
+  news: [ {} ], /* Array of objects with last news with company mentioning */
+  other: {
+    institutionalOwnPercent: 0.611,
+    recommendation: 2.1
+  },
+  peers: [ 'MSFT', 'NOK', 'IBM', 'HPQ', 'GOOGL', 'BB' ], /* Array of strings with tickers of peer companies */
+  price: {
+    change1dPercent: 0.00359,
+    change5dPercent: 0.025092,
+    change1mPercent: 0.08344,
+    change3mPercent: 0.329811,
+    change6mPercent: -0.076093,
+    changeytdPercent: 0.290907,
+    change1yPercent: 0.230147,
+    change2yPercent: 0.431199,
+    change5yPercent: 1.68661,
+    day50MovingAvg: 184.05,
+    day200MovingAvg: 191.39,
+    marketCap: 961256980800,
+    price: 203.86,
+    priceTarget: 194.07,
+    priceTargetHigh: 245,
+    priceTargetLow: 140,
+    priceTargetPercent: -0.048,
+    yearLow: 142,
+    yearHigh: 233.47,
+    yearLowPercent: 0.436,
+    yearHighPercent: -0.127
+  },
+  ratios: {
+    beta: 1.13,
+    debtToEq: 0.97,
+    ltDebtToEq: 0.79,
+    pb: 8.19,
+    pc: 11.05,
+    pe: 17.08,
+    peForward: 15.91,
+    peg: 1.314,
+    pegDivAdjusted: 1.186,
+    pegDivGrowthAdjusted: 1.174,
+    pfcf: 19.88,
+    ps: 3.65,
+    roa: 0.163,
+    roe: 0.509,
+    roi: 0.266
+  },
+  recommendationTrends: [{}] /* Array of objects with analysts ratings(Buy, Overweight, Hold, Underweight, Sell) over time */
 }
 ```
 
-If ticker not found returns an following object:
-
-```javascript
-{
-   statusCode,
-   message: 'Ticker not found'
-}
-```
+If ticker not found or an error happened returns `undefined`.
