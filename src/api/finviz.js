@@ -5,6 +5,9 @@ const { checkValue, getNode } = require("../utils")
 const parse = html => {
   const table = $(".snapshot-table2 td", html)
 
+  const country =
+    $("td .fullview-links", html)[1].children[4].children[0].data || null
+
   const getStat = index => {
     const name = table[index].children[0].data
     const value = getNode(table[index + 1])
@@ -46,7 +49,8 @@ const parse = html => {
     epsQQ: getStat(112),
     profitMargin: getStat(114),
     ltDebtToEq: getStat(122),
-    recommendation: getStat(132)
+    recommendation: getStat(132),
+    country
   }
 }
 

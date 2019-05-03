@@ -72,7 +72,8 @@ Scraper returns an object with following structure:
     issueType: 'cs',
     sector: 'Electronic Technology',
     employees: 132000,
-    tags: [ 'Electronic Technology', 'Telecommunications Equipment' ]
+    tags: [ 'Electronic Technology', 'Telecommunications Equipment' ],
+    country: 'USA'
   },
   dividends: {
     buybackPercent: 0.052,

@@ -1,4 +1,5 @@
 const {
+  buildCompanyData,
   buildDividendsData,
   buildFinancialsData,
   buildOtherData,
@@ -12,7 +13,10 @@ const buildData = (ticker, { finviz, gurufocus, iextrading }, settings) => {
     id: getAccess(settings.id, ticker),
     ticker: getAccess(settings.ticker, ticker.toUpperCase()),
     chart: getAccess(settings.chart, iextrading.chart),
-    company: getAccess(settings.company, iextrading.company),
+    company: getAccess(
+      settings.company,
+      buildCompanyData({ finviz, iextrading })
+    ),
     dividends: getAccess(
       settings.dividends,
       buildDividendsData({ finviz, gurufocus, iextrading })
