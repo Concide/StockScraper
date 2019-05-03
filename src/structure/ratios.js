@@ -15,7 +15,8 @@ module.exports = ({ finviz, gurufocus }) => {
     peForward: finviz.forwardPE["Forward P/E"],
     peg: calculatePeg(finviz),
     pegDivAdjusted: calculateAdjustedPeg(finviz),
-    pegDivGrowthAdjusted: calculateDivGrowthAdjustedPeg(finviz, gurufocus),
+    pegDivGrowthAdjusted:
+      calculateDivGrowthAdjustedPeg(finviz, gurufocus) || null,
     pfcf: finviz.pfcf["P/FCF"],
     ps: finviz.ps["P/S"],
     roa: finviz.roa["ROA"],

@@ -2,7 +2,7 @@ const { checkValue } = require("./index")
 
 const calculateAdjustedPeg = finviz => {
   const data = {
-    dividendYield: checkValue(finviz.dividendPercent["Dividend %"]),
+    dividendYield: checkValue(finviz.dividendPercent["Dividend %"] || 0),
     epsGrowth: finviz.epsNext5Y["EPS next 5Y"],
     pe: finviz.pe["P/E"] / 100
   }

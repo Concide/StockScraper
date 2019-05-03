@@ -13,9 +13,7 @@ const getData = async ({ ticker, token, settings = {} }) => {
     let data = {
       gurufocus: null,
       finviz: await finvizAPI(ticker),
-      iextrading:
-        token &&
-        (await iextradingAPI({ ticker, token, settings: dataSettings }))
+      iextrading: await iextradingAPI({ ticker, token, settings: dataSettings })
     }
 
     if (data.finviz.statusCode || !data.iextrading) return undefined

@@ -1,6 +1,6 @@
 {
   "name": "@concide/stock-scraper",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Stock Scraper is a script, that fetches and parses data about stock from :",
   "main": "index.js",
   "scripts": {
