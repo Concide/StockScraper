@@ -1,6 +1,8 @@
 module.exports = ({ finviz, iextrading }) => {
-  return {
+  const data = {
     ...iextrading.company,
     country: finviz.country
   }
+
+  return data
 }

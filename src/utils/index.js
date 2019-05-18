@@ -40,8 +40,8 @@ const filterData = obj => {
   return data
 }
 
-const reduceToObject = ({ labels, data }) => {
-  return data
+const reduceToObject = ({ labels, data }) =>
+  data
     .map((data, index) => ({
       id: labels[index],
       data
@@ -50,7 +50,6 @@ const reduceToObject = ({ labels, data }) => {
       obj[item.id] = item.data
       return obj
     }, {})
-}
 
 module.exports = {
   checkValue,

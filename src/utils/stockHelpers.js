@@ -38,18 +38,17 @@ const calculateDivGrowthAdjustedPeg = (finviz, gurufocus) => {
   return null
 }
 
-const calculateFairPrice = (targetPrice, price) => {
-  return Number((targetPrice / price - 1).toFixed(3))
-}
+const calculateFairPrice = (targetPrice, price) =>
+  Number((targetPrice / price - 1).toFixed(3))
 
-const calculatePeg = finviz => {
-  return Number(
-    (finviz.pe["P/E"] / 100 / finviz.epsNext5Y["EPS next 5Y"]).toFixed(3)
-  )
-}
+const calculatePeg = finviz =>
+  Number((finviz.pe["P/E"] / 100 / finviz.epsNext5Y["EPS next 5Y"]).toFixed(3))
+
+const calculateChowderRatio = ({ div, divGr }) => Number((div + divGr) * 100)
 
 module.exports = {
   calculateAdjustedPeg,
+  calculateChowderRatio,
   calculateDivGrowthAdjustedPeg,
   calculateFairPrice,
   calculatePeg

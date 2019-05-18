@@ -1,5 +1,5 @@
 module.exports = ({ finviz, iextrading }) => {
-  return {
+  const data = {
     bookPerShare: finviz.bookPerShare["Book/sh"],
     cashPerShare: finviz.cashPerShare["Cash/sh"],
     earningsNextDate: iextrading.stock.nextEarningsDate,
@@ -18,4 +18,6 @@ module.exports = ({ finviz, iextrading }) => {
     salesGrowthQQPercent: finviz.salesQQ["Sales Q/Q"],
     salesGrowthPast5YPercent: finviz.salesGrowthPast5Y["Sales past 5Y"]
   }
+
+  return data
 }

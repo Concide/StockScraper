@@ -1,7 +1,7 @@
 const { calculateFairPrice } = require("../utils/stockHelpers")
 
 module.exports = ({ finviz, iextrading }) => {
-  return {
+  const data = {
     change1dPercent: iextrading.quote.changePercent,
     change5dPercent: iextrading.stock.day5ChangePercent,
     change1mPercent: iextrading.stock.month1ChangePercent,
@@ -18,13 +18,14 @@ module.exports = ({ finviz, iextrading }) => {
     priceTarget: iextrading.priceTarget.priceTargetAverage,
     priceTargetHigh: iextrading.priceTarget.priceTargetHigh,
     priceTargetLow: iextrading.priceTarget.priceTargetLow,
-    priceTargetPercent: calculateFairPrice(
-      iextrading.priceTarget.priceTargetAverage,
-      iextrading.price
-    ),
     yearLow: iextrading.stock.week52low,
     yearHigh: iextrading.stock.week52high,
     yearLowPercent: finviz.yearLow["52W Low"],
     yearHighPercent: finviz.yearHigh["52W High"]
+  }
+
+  return {
+    ...data,
+    priceTargetPercent: calculateFairPrice(data.priceTarget, data.price)
   }
 }

@@ -5,7 +5,7 @@ const {
 } = require("../utils/stockHelpers")
 
 module.exports = ({ finviz, gurufocus }) => {
-  return {
+  const data = {
     beta: finviz.beta["Beta"],
     debtToEq: finviz.debtToEq["Debt/Eq"],
     ltDebtToEq: finviz.ltDebtToEq["LT Debt/Eq"],
@@ -23,4 +23,5 @@ module.exports = ({ finviz, gurufocus }) => {
     roe: finviz.roe["ROE"],
     roi: finviz.roi["ROI"]
   }
+  return data
 }

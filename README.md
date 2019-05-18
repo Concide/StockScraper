@@ -77,6 +77,7 @@ Scraper returns an object with following structure:
   },
   dividends: {
     buybackPercent: 0.052,
+    chowderRatio: 11.9,
     dividendYieldPercent: 0.014,
     dividend: 2.92,
     exDividendDate: '2019-02-08',
