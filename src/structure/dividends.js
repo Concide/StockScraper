@@ -1,5 +1,8 @@
 const { checkValue } = require("../utils")
-const { calculateChowderRatio } = require("../utils/stockHelpers")
+const {
+  calculateChowderRatio,
+  calculatePeToChowderRatio
+} = require("../utils/stockHelpers")
 
 module.exports = ({ finviz, gurufocus, iextrading }) => {
   if (!gurufocus) return null
@@ -21,14 +24,17 @@ module.exports = ({ finviz, gurufocus, iextrading }) => {
     yieldOnCost10yPercent: checkValue(gurufocus["Yield on Cost (10-year)"])
   }
 
+  const divData = {
+    div: data.dividendYieldPercent,
+    divGr:
+      data.growthRatePercent5y ||
+      data.growthRatePercent3y ||
+      data.growthRatePercent1y
+  }
+
   return {
     ...data,
-    chowderRatio: calculateChowderRatio({
-      div: data.dividendYieldPercent,
-      divGr:
-        data.growthRatePercent5y ||
-        data.growthRatePercent3y ||
-        data.growthRatePercent1y
-    })
+    chowderRatio: calculateChowderRatio(divData),
+    peToChowderRatio: calculatePeToChowderRatio(finviz.pe["P/E"], divData)
   }
 }

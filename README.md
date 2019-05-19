@@ -87,6 +87,7 @@ Scraper returns an object with following structure:
     growthRatePercent10y: 0,
     history: [ {} ], /* Array of objects about dividend payments for last 5 years */
     payoutRatioPercent: 0.23,
+    peToChowderRatio: 1.44,
     yieldOnCost1yPercent: 0.016,
     yieldOnCost3yPercent: 0.02,
     yieldOnCost5yPercent: 0.024,

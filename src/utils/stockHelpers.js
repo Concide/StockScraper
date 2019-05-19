@@ -46,10 +46,14 @@ const calculatePeg = finviz =>
 
 const calculateChowderRatio = ({ div, divGr }) => Number((div + divGr) * 100)
 
+const calculatePeToChowderRatio = (pe, div) =>
+  Number((pe / calculateChowderRatio(div)).toFixed(2))
+
 module.exports = {
   calculateAdjustedPeg,
   calculateChowderRatio,
   calculateDivGrowthAdjustedPeg,
   calculateFairPrice,
-  calculatePeg
+  calculatePeg,
+  calculatePeToChowderRatio
 }
