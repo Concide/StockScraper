@@ -3,6 +3,7 @@ const {
   calculateChowderRatio,
   calculatePeToChowderRatio
 } = require("../utils/stockHelpers")
+const { projectDividendIncome } = require("../utils/projectDividendIncome")
 
 module.exports = ({ finviz, gurufocus, iextrading }) => {
   if (!gurufocus) return null
@@ -35,6 +36,15 @@ module.exports = ({ finviz, gurufocus, iextrading }) => {
   return {
     ...data,
     chowderRatio: calculateChowderRatio(divData),
-    peToChowderRatio: calculatePeToChowderRatio(finviz.pe["P/E"], divData)
+    peToChowderRatio: calculatePeToChowderRatio(finviz.pe["P/E"], divData),
+    projectedDividendReinvestmentHistory: projectDividendIncome(
+      data.dividend,
+      divData.divGr,
+      iextrading.price,
+      0.1,
+      20,
+      10000,
+      true
+    )
   }
 }

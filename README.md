@@ -88,6 +88,39 @@ Scraper returns an object with following structure:
     history: [ {} ], /* Array of objects about dividend payments for last 5 years */
     payoutRatioPercent: 0.23,
     peToChowderRatio: 1.44,
+    projectedDividendReinvestmentHistory: {
+      /* Projected Dividend Income of 10000$ invested for next 20 years with Reinvestment */
+      years: 20,
+      moneyBegin: 10000,
+      moneyEnd: 20304.335193542138,
+      overallDividendIncome: 10304.335193542138,
+      moneyGrowthPercent: 1.0304335193542138,
+      dividendBegin: 2.92,
+      dividendEnd: 21.509405738422792,
+      dividendGrowthPercent: 6.366234841925614,
+      dividendIncomeBegin: 143.23555381143922,
+      dividendIncomeEnd: 1392.7443985387981,
+      dividendIncomeGrowthPercent: 8.723454557743814,
+      yearsHistory: [{
+        year: 0,
+        money: 10000,
+        stocks: 49.05327185323261,
+        price: 203.86,
+        dividend: 2.92,
+        dividendIncome: 143.23555381143922,
+        overallDividendIncome: 0
+       },
+       ...
+       {
+        year: 20,
+        money: 20304.335193542138,
+        stocks: 65.74615846953937,
+        price: 1371.4681396695194,
+        dividend: 21.509405738422792,
+        dividendIncome: 1392.7443985387981,
+        overallDividendIncome: 10304.335193542138
+       }],
+    },
     yieldOnCost1yPercent: 0.016,
     yieldOnCost3yPercent: 0.02,
     yieldOnCost5yPercent: 0.024,
